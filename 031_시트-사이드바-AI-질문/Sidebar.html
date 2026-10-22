@@ -1,0 +1,16 @@
+<!-- 파일 이름: Sidebar (HTML) -->
+<div style="font-family:sans-serif;padding:8px">
+  <p>선택한 칸을 참고해서 답해 드려요.</p>
+  <textarea id="q" rows="4" style="width:100%"></textarea>
+  <button onclick="send()">물어보기</button>
+  <p id="a" style="white-space:pre-wrap"></p>
+</div>
+<script>
+function send() {
+  document.getElementById('a').innerText = '생각하는 중...';
+  google.script.run
+    .withSuccessHandler(function (t) { document.getElementById('a').innerText = t; })
+    .withFailureHandler(function (e) { document.getElementById('a').innerText = '오류: ' + e.message; })
+    .ask(document.getElementById('q').value);
+}
+</script>
